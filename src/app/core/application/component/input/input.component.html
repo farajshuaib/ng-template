@@ -1,0 +1,19 @@
+<div  *ngIf="valueFormGroup && valueFormControl" [formGroup]="valueFormGroup">
+  <label [for]="name">{{ label }}</label>
+  <input
+    [id]="name"
+    [name]="name"
+    [placeholder]="placeholder"
+    [type]="type"
+    [formControlName]="controlName"
+    class="input "
+  />
+
+
+  <p class="error-message"
+     *ngFor="let item of listValidationResult">
+    <span  *ngIf="valueFormGroup.get(controlName)?.touched && valueFormGroup.get(controlName)?.errors?.[item]" >
+    {{ validationResult[item] }}
+    </span>
+  </p>
+</div>

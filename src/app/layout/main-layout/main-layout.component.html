@@ -1,0 +1,75 @@
+<div class="h-screen bg-secondary">
+
+  <!-- Sidebar -->
+  <aside
+    class="fixed top-0 right-0 z-10 w-16 min-h-screen text-black transition-transform duration-300 transform translate-x-full bg-white lg:translate-x-0 lg:w-64">
+    <!-- Mobile Burger Menu Button -->
+    <button id="toggleSidebar" class="fixed z-20 p-2 bg-white rounded-md shadow-md lg:hidden top-4 right-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <div class="flex items-center justify-center py-8">
+      <img ngSrc="/logo.png"
+           alt="logo" width="120" height="80"/>
+    </div>
+    <!-- Sidebar Content -->
+    <ul class="p-2 mt-5 space-y-4">
+      <li *ngFor="let route of routes">
+        <a [routerLink]="route.path" [routerLinkActive]="['bg-primary/10']"
+           class="flex items-center gap-2 px-3 py-2  rounded-lg">
+          <i [class]="route.data?.['icon']"></i>
+          <span>
+            {{ route.title }}
+          </span>
+        </a>
+      </li>
+
+    </ul>
+  </aside>
+
+  <!-- Page Content -->
+  <main class="h-full overflow-scroll lg:mr-64 customScrollBar">
+    <!-- Sticky Header -->
+    <header class="flex justify-between items-center p-4 bg-white shadow-sm lg:px-8 lg:py-4 lg:sticky lg:top-0 lg:z-20">
+      <h1 class="text-gray-800 text-1xl">angular template</h1>
+      <div class="flex items-center gap-2">
+        <p>مرحباّ {{ authStore.userData()?.name }}</p>
+        <app-dropdown>
+          <div trigger
+               class="h-8  w-8 flex justify-center items-center text-dark800 rounded-full border border-dark200">
+            <i class='bx bx-user text-xl'></i>
+          </div>
+          <div content>
+            <li>
+              <button (click)="logout()"
+                      class="w-full px-4 py-2 hover:bg-primary/10  flex items-center gap-2 justify-start">
+                <i class='bx bx-log-out'></i>
+                <span>تسجيل الخروج</span>
+              </button>
+            </li>
+          </div>
+        </app-dropdown>
+      </div>
+
+    </header>
+    <app-breadcrumb></app-breadcrumb>
+    <!-- Content -->
+    <div class="container px-5 mx-auto ">
+
+      <router-outlet></router-outlet>
+    </div>
+
+
+  </main>
+
+  <!-- JavaScript to toggle sidebar on small screens -->
+  <script>
+    const sidebar = document.querySelector('aside');
+    const toggleButton = document.querySelector('#toggleSidebar');
+
+    toggleButton.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+  </script>
+</div>

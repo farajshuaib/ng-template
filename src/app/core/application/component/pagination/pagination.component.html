@@ -1,0 +1,53 @@
+<section *ngIf="lastPage != 0" class="flex flex-wrap  items-center justify-center gap-5 lg:justify-between my-5">
+  <div class="flex items-center gap-2">
+    <label for="selectPage" class="text-sm">الصفحة</label>
+    <select
+      id="selectPage"
+      [value]="currentPage"
+      class="!appearance-none !bg-none text-dark600 border border-[#707070] !px-4 rounded-lg flex justify-center items-center text-center text-sm"
+    >
+      <option *ngFor="let page of Array(lastPage).fill(1)" [value]="page">{{ page }}</option>
+    </select>
+    <p class="text-sm text-dark600">
+      من {{ currentPage }} من {{ lastPage }}
+    </p>
+  </div>
+
+  <div class="flex gap-2 text-sm font-medium">
+    <button
+      class="inline-flex items-center justify-center rounded-lg w-11 h-11 hover:bg-primary/40 text-dark600 bg-tertiary"
+      (click)="setPage(1)" [disabled]="currentPage === 1">
+      <i class='bx bx-chevrons-right'></i>
+    </button>
+    <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1"
+            class="inline-flex items-center justify-center rounded-lg w-11 h-11 hover:bg-primary/40 text-dark600 bg-tertiary">
+      <i class='bx bx-chevron-right'></i>
+    </button>
+
+    <ng-container *ngFor="let page of pagination(currentPage, lastPage)">
+      <button
+        (click)="setPage(page)"
+        [class.active]="page === currentPage"
+        [class]="
+            page === currentPage
+              ? ' bg-primary text-white'
+              : 'hover:bg-primary/40  text-dark600 bg-tertiary'
+          "
+        class="inline-flex items-center justify-center rounded-lg w-11 h-11"
+      >
+        {{ page }}
+      </button>
+    </ng-container>
+
+    <button
+      class="inline-flex items-center justify-center rounded-lg w-11 h-11 hover:bg-primary/40 text-dark600 bg-tertiary"
+      (click)="setPage(currentPage + 1)" [disabled]="currentPage === lastPage">
+      <i class='bx bx-chevron-left'></i>
+    </button>
+    <button
+      class="inline-flex items-center justify-center rounded-lg w-11 h-11 hover:bg-primary/40 text-dark600 bg-tertiary"
+      (click)="setPage(lastPage)" [disabled]="currentPage === lastPage">
+      <i class='bx bx-chevrons-left'></i>
+    </button>
+  </div>
+</section>

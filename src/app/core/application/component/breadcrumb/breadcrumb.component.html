@@ -1,0 +1,19 @@
+<section
+  class="w-full py-2 px-5 z-10 bg-tertiary border-b-[1px] border-tertiary flex items-center"
+>
+  <div class="container px-5 mx-auto">
+    <ul class="flex items-center justify-start gap-2">
+      <li *ngFor="let item of breadcrumb(); let i = index">
+        <a
+          [routerLink]="item.path"
+          class="text-xs font-normal text-primary hover:underline"
+        >
+            <span>
+              {{ item.title }}
+            </span>
+          <span *ngIf="i < breadcrumb().length - 1"> > </span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>

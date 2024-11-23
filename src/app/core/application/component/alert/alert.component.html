@@ -1,0 +1,6 @@
+<div class="alert-danger" *ngIf="contentState.status == CoreContentStatus.error">
+  <p>{{contentState.message}}</p>
+</div>
+<div class="alert-success" *ngIf="contentState.status == CoreContentStatus.success">
+  <p>{{contentState.message}}</p>
+</div>

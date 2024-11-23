@@ -1,0 +1,10 @@
+  <i class='bx bx-info-circle text-primary text-6xl text-center block mt-5'></i>
+<h2 mat-dialog-title class="text-xl text-dark800">{{ data.title }}</h2>
+<mat-dialog-content>
+  <p class="text-dark800">{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="flex items-center gap-5">
+    <app-button [title]="'حسنا'" mat-dialog-close type="button" [class]="'button-primary text-xs'"/>
+  </div>
+</mat-dialog-actions>

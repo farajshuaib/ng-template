@@ -1,0 +1,21 @@
+
+
+.budge {
+  @apply rounded-2xl px-4 py-1 text-sm w-fit flex items-center justify-center;
+}
+
+.budge.primary {
+  @apply text-white bg-primary
+}
+
+.budge.warning {
+  @apply text-white bg-warning
+}
+
+.budge.success {
+  @apply text-white bg-success
+}
+
+.budge.danger {
+  @apply text-white bg-danger
+}

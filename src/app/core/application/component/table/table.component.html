@@ -1,0 +1,23 @@
+<div class="relative overflow-x-auto overflow-y-hidden customScrollBar rounded-t-lg drop-shadow-primary">
+  <table class="w-full text-justify bg-white ">
+    <thead>
+    <tr class="p-4 bg-primary/20">
+      <th *ngFor="let column of columns" class="px-4 py-3 text-xs font-semibold whitespace-nowrap text-dark800">
+        {{ column }}
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr *ngIf="isEmpty">
+      <td [colSpan]="columns.length" class="bg-gray-50">
+        <app-no-content></app-no-content>
+      </td>
+    </tr>
+    <ng-content></ng-content>
+
+    </tbody>
+  </table>
+</div>
+
+

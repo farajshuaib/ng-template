@@ -1,0 +1,26 @@
+<form [formGroup]="formControl" (submit)="submit()">
+  <h1 class="text-3xl text-center"> تسجيل الدخول</h1>
+  <div class="my-5">
+    <label for="username">اسم المستخدم</label>
+    <input type="email" id="username" name="username" class="input" formControlName="username"/>
+    <p class="error-message" *ngIf="formControl.get('username')?.touched &&formControl.get('username')?.errors">
+      الرجاء إدخال اسم المستخدم
+    </p>
+  </div>
+  <div class="my-5">
+    <label for="password"> كلمة المرور</label>
+    <input type="password" id="password" name="password" class="input" formControlName="password"/>
+    <p class="error-message" *ngIf="formControl.get('password')?.touched &&formControl.get('password')?.errors">
+      الرجاء إدخال كلمة المرور
+    </p>
+  </div>
+
+  <div class="col-span-full">
+    <app-alert [contentState]="store.contentState()"/>
+  </div>
+
+
+  <div>
+    <app-button [title]="'تسجيل الدخول'" [contentState]="store.contentState()" />
+  </div>
+</form>

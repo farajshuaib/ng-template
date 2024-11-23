@@ -1,0 +1,17 @@
+<div class="flex items-center justify-center h-screen bg-secondary">
+  <div
+    class="relative z-50 w-11/12 p-5 bg-white bg-opacity-50 border shadow-sm sm:w-3/4 md:w-1/2 xl:w-1/3 rounded-2xl bg-clip-padding backdrop-filter backdrop-blur-sm">
+    <div
+      class="flex items-center justify-center w-24 h-24 p-2 mx-auto -mb-12 overflow-hidden transform -translate-y-16 bg-white border rounded-full shadow-sm border-gray-50 shadow-primary/30 bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-40">
+      <img class="object-contain w-full h-full"
+           ngSrc="/logo.png"
+           alt="logo" width="140" height="120"/>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center h-screen overflow-hidden">
+  <span
+    class="block -translate-x-1/2 translate-y-1/2 rounded-full bg-primary w-72 h-72 mix-blend-multiply filter blur-3xl opacity-10 lg:w-96 lg:h-96"></span>
+
+</div>

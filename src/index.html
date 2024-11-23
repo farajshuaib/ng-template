@@ -1,13 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
   <title>NgTemplate</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="language" content="arabic,english"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
+        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <meta name="robots" content="index"/>
+  <meta http-equiv="Pragma" content="Public"/>
+  <meta http-equiv="Cache-Control" content="Public"/>
+  <meta property="og:url" content=""/>
+  <meta property="og:type" content=""/>
+  <meta property="og:title" content=""/>
+  <meta property="og:description" content=""/>
+  <meta property="og:image" content="/logo.svg"/>
+  <meta name="author" content="Faraj Shuaib"/>
+  <meta name="copyright" content="Faraj Shuaib"/>
+  <meta name="description" content="Angular dashboard template"/>
+  <meta name="keywords" content="Angular, signal, template, portal, dashboard"/>
+  <meta name="theme-color" content="#111"/>
 </head>
 <body>
+
+<div id="InitScreenDOM" class="h-screen fixed z-50 inset-0 flex items-center justify-center text-center bg-secondary">
+  <div class="w-full flex justify-center items-center m-auto py-12 gap-8 flex-col sm:w-3/4 lg:w-1/2">
+    <img alt="logo" src="/logo.png" loading="lazy" class="w-full h-auto max-w-[400px]"/>
+    <i class="bx bx-loader-circle bx-spin text-primary text-5xl"></i>
+  </div>
+</div>
+
   <app-root></app-root>
 </body>
 </html>

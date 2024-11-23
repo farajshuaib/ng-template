@@ -1,0 +1,75 @@
+<div>
+  <section class="my-5">
+    <app-page-title [title]="'المستخدمين'"
+                    [subTitle]="'اضافة مستخدم'"/>
+
+  </section>
+
+
+  <section class="my-5">
+
+    <form [formGroup]="formControl" (ngSubmit)="onSubmit()" class="grid grid-cols-2 gap-4">
+
+      <app-input
+        [label]="'اسم المستخدم'"
+        [name]="'username'"
+        [formGroup]="formControl"
+        [placeholder]="'اسم المستخدم'"
+        formControlName="username"
+        ngDefaultControl
+        [validationResult]="{ required: 'اسم المستخدم مطلوب' }"
+      />
+
+      <app-input
+        [label]="'الاسم'"
+        [name]="'name'"
+        [formGroup]="formControl"
+        [placeholder]="'الاسم'"
+        formControlName="name"
+        ngDefaultControl
+        [validationResult]="{ required: 'الاسم مطلوب' }"
+      />
+
+      <app-input
+        [label]="'كلمة المرور'"
+        [type]="'password'"
+        [name]="'password'"
+        [formGroup]="formControl"
+        [placeholder]="'كلمة المرور'"
+        formControlName="password"
+        ngDefaultControl
+        [validationResult]="{
+          required: 'كلمة المرور مطلوبة',
+          minlength: 'كلمة المرور يجب ان تكون اكثر من 8 احرف',
+          pattern: 'كلمة المرور يجب ان تحتوي على انجليزية حروف كبيرة وصغيرة وارقام ورموز'
+         }"
+      />
+
+
+      <app-select-input
+        [label]="'دور المستخدم'"
+        [name]="'role'"
+        [formGroup]="formControl"
+        [options]="userRolesOptions"
+        formControlName="role"
+        ngDefaultControl
+        [validationResult]="{ required: 'دور المستخدم مطلوب' }"/>
+
+
+      <div class="col-span-full">
+        <app-alert [contentState]="store.contentState()"/>
+      </div>
+
+
+      <div class="flex gap-4 col-span-full">
+        <app-button [title]="'إضافة مستخدم'"  type="submit"
+                    [contentState]="store.contentState()"/>
+
+        <app-button [title]="'تراجع'" [class]="'button-secondary'" type="button" (click)="onCancel()"/>
+      </div>
+
+    </form>
+
+  </section>
+
+</div>

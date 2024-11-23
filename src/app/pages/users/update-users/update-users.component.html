@@ -1,0 +1,154 @@
+<div>
+  <section class="my-5">
+    <app-page-title [title]="'المستخدمين'"
+                    [subTitle]="'تعديل مستخدم'"/>
+
+  </section>
+
+
+  <section class="my-5 grid grid-cols-12 gap-5">
+    <form [formGroup]="formControl" (ngSubmit)="onSubmit()"
+          class="lg:border lg:p-5 lg:rounded-lg lg:border-dark500 col-span-full lg:col-span-5 flex flex-col gap-4">
+
+      <div
+        class="flex items-center justify-center bg-secondary p-5 rounded-2xl flex-col gap-2 text-primaryDark"
+      >
+        <div class="bg-white shadow-sm rounded-full p-1">
+          <img
+            alt=""
+            class="object-cover bg-center rounded-full h-[95px] w-[95px] mx-auto"
+            ngSrc="https://cdn-icons-png.flaticon.com/512/3177/3177440.png"
+            width="120"
+            height="120"
+          />
+        </div>
+        <p class="text-lg">{{ user()?.name }}</p>
+      </div>
+
+      <app-input
+        [label]="'اسم المستخدم'"
+        [name]="'username'"
+        [formGroup]="formControl"
+        [placeholder]="'اسم المستخدم'"
+        formControlName="username"
+        ngDefaultControl
+        [validationResult]="{ required: 'اسم المستخدم مطلوب' }"
+      />
+
+      <app-input
+        [label]="'الاسم'"
+        [name]="'name'"
+        [formGroup]="formControl"
+        [placeholder]="'الاسم'"
+        formControlName="name"
+        ngDefaultControl
+        [validationResult]="{ required: 'الاسم مطلوب' }"
+      />
+
+      <app-input
+        [label]="'كلمة المرور'"
+        [type]="'password'"
+        [name]="'password'"
+        [formGroup]="formControl"
+        [placeholder]="'كلمة المرور'"
+        formControlName="password"
+        ngDefaultControl
+        [validationResult]="{
+          required: 'كلمة المرور مطلوبة',
+          minlength: 'كلمة المرور يجب ان تكون اكثر من 8 احرف',
+          pattern: 'كلمة المرور يجب ان تحتوي على انجليزية حروف كبيرة وصغيرة وارقام ورموز'
+         }"
+      />
+
+
+      <app-select-input
+        [label]="'دور المستخدم'"
+        [name]="'role'"
+        [formGroup]="formControl"
+        [options]="userRolesOptions"
+        formControlName="role"
+        ngDefaultControl
+        [validationResult]="{ required: 'دور المستخدم مطلوب' }"/>
+
+
+      <div class="col-span-full">
+        <app-alert [contentState]="store.contentState()"/>
+      </div>
+
+
+      <div class="flex gap-4 col-span-full">
+        <app-button
+          [title]="'تعديل مستخدم'"
+          type="submit"
+          [contentState]="store.contentState()"
+        />
+
+        <app-button
+          [title]="'تراجع'"
+          [class]="'button-secondary'"
+          type="button"
+          (click)="onCancel()"
+        />
+      </div>
+
+    </form>
+    <div class="col-span-full lg:col-span-5">
+      <div class="bg-white rounded-2xl overflow-hidden">
+        <app-table [columns]="['الصلاحية', 'العملية']">
+          <tr *ngFor="let permission of permissionStore.permissions()">
+            <td>
+              <span class="">
+                {{ permission.name }}
+              </span>
+            </td>
+            <td>
+              <button
+                type="button"
+                (click)="toggleAddPermission(permission)"
+                *ngIf="hasPermission(permission) ; else notHasPermission"
+                [disabled]="user()?.id === authStore.userData()?.id"
+                class="btn border gap-2 bg-white text-sm border-danger !rounded-lg text-danger"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                  <path id="do_not_disturb_on_FILL0_wght400_GRAD0_opsz48"
+                        d="M85,186.675H95v-1.5H85ZM90,196a9.676,9.676,0,0,1-3.875-.787,10.075,10.075,0,0,1-5.338-5.338,9.989,9.989,0,0,1,0-7.775,9.994,9.994,0,0,1,2.15-3.175,10.251,10.251,0,0,1,3.188-2.137,9.989,9.989,0,0,1,7.775,0,9.984,9.984,0,0,1,5.313,5.313,9.989,9.989,0,0,1,0,7.775,10.251,10.251,0,0,1-2.138,3.188,9.994,9.994,0,0,1-3.175,2.15A9.738,9.738,0,0,1,90,196Zm0-1.5a8.493,8.493,0,1,0-6.012-2.487A8.179,8.179,0,0,0,90,194.5ZM90,186Z"
+                        transform="translate(-80 -176)" fill="#da2834"/>
+                </svg>
+
+                <span>حذف</span>
+              </button>
+              <ng-template #notHasPermission>
+                <button
+                  type="button"
+                  (click)="toggleAddPermission(permission)"
+                  [disabled]="user()?.id === authStore.userData()?.id"
+                  class="btn border gap-2 text-sm border-primary text-white !rounded-lg bg-primary"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                    <path id="add_circle_FILL0_wght400_GRAD0_opsz48"
+                          d="M89.325,191h1.5v-4.15H95v-1.5H90.825V181h-1.5v4.35H85v1.5h4.325Zm.682,5a9.68,9.68,0,0,1-3.888-.787,10.1,10.1,0,0,1-5.332-5.334,10.009,10.009,0,0,1,0-7.783,10.006,10.006,0,0,1,2.15-3.171,10.264,10.264,0,0,1,3.184-2.137,10.009,10.009,0,0,1,7.783,0,9.995,9.995,0,0,1,5.309,5.313,10,10,0,0,1,0,7.781,10.213,10.213,0,0,1-2.138,3.177,10.1,10.1,0,0,1-3.175,2.15A9.672,9.672,0,0,1,90.007,196Zm.006-1.5a8.493,8.493,0,1,0-6.025-2.487A8.165,8.165,0,0,0,90.012,194.5ZM90,186Z"
+                          transform="translate(-80 -176)" fill="#fff"/>
+                  </svg>
+                  <span class="text-white">اضافة</span>
+                </button>
+              </ng-template>
+            </td>
+          </tr>
+        </app-table>
+
+        <div>
+          <app-button
+            type="button"
+            [title]="'حفظ الصلاحيات'"
+            [class]="'button-primary'"
+            (click)="onSavePermissionsChanges()"
+            [disabled]="user()?.id === authStore.userData()?.id"
+          />
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+</div>

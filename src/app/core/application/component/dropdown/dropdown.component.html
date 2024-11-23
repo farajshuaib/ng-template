@@ -1,0 +1,10 @@
+<div class="dropdown relative inline-block">
+  <button (click)="toggleDropdown()">
+    <ng-content select="[trigger]"></ng-content>
+  </button>
+  <ul *ngIf="isOpen"
+      [@dropdownAnimation]="isOpen ? 'open' : 'closed'"
+      class="absolute ltr:right-0 rtl:left-0 bg-white border border-dark200 mt-2 w-56 rounded drop-shadow-primary">
+    <ng-content select="[content]"></ng-content>
+  </ul>
+</div>

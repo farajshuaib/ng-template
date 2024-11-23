@@ -1,0 +1,59 @@
+<div>
+  <section class="my-5">
+    <app-page-title
+      [title]="'المستخدمين'"
+      [subTitle]="'قائمة المستخدمين'"
+      (actionClicked)="onAddClicked()"
+      [buttonLabel]="'إضافة مستخدم'"
+    />
+  </section>
+
+
+  <app-container [contentState]="store.contentState()">
+
+    <div class="flex gap-5 my-8">
+      <div class="w-1/4">
+        <label for="provider" class="label">نوع المستخدم</label>
+        <select name="provider" id="provider" class="input" [ngModel]="store.selectedUserState()"
+                (ngModelChange)="store.setSelectedUserState($event)">
+          <option value="" hidden [attr.disabled]="true">
+            اختر نوع المستخدم
+          </option>
+          <option *ngFor="let item of userStateOptions" [value]="item.value">{{ item.name }}</option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <div class="my-5">
+      <app-table [isEmpty]="store.users().length == 0"
+                 [columns]="['#', 'الاسم', 'اسم المستخدم', 'دور المستخدم', 'الحالة', 'العمليات']">
+        <tr class="group" *ngFor="let item of store.users()">
+          <td><span>{{ item.id }}</span></td>
+          <td><span>{{ item.name }}</span></td>
+          <td><span>{{ item.username }}</span></td>
+          <td><span>{{ getUserRoleName(item.role) }}</span></td>
+          <td>
+            <app-budge [type]="item.state == UserState.Disalbed  ?   'danger' : 'success'">
+              {{ getUserStateName(item.state) }}
+            </app-budge>
+          </td>
+          <app-table-actions
+            [rowsOptions]="{
+                hasEdit: true,
+                hasActive: item.state == UserState.Disalbed,
+                hasBlock: item.state == UserState.Enabled,
+            }"
+            (editEvent)="onEditClicked(item.id)"
+            (blockEvent)="changeState(item.id)"
+            (activeEvent)="changeState(item.id)"
+          ></app-table-actions>
+        </tr>
+      </app-table>
+    </div>
+
+  </app-container>
+
+
+</div>

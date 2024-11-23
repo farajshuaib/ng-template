@@ -1,0 +1,10 @@
+  <h2 mat-dialog-title	 class="text-xl text-dark800">{{ data.title }}</h2>
+<mat-dialog-content>
+  <p class="text-dark800">{{ data.message }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <div class="flex items-center gap-5" >
+    <app-button [title]="'الغاء'" mat-dialog-close type="button" [class]="'button-secondary text-xs'"/>
+    <app-button [title]="'تأكيد'" [mat-dialog-close]="true" type="button" [class]="'text-xs'"/>
+  </div>
+</mat-dialog-actions>
